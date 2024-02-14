@@ -37,10 +37,7 @@ Rectangle {
                     verticalCenter: backRest.verticalCenter
                     verticalCenterOffset: -20
                 }
-                transform: Scale {
-                    origin.x: cushion.width / 2
-                    xScale: cushionHardness
-                }
+                opacity: cushionHardness
             }
 
             Image {

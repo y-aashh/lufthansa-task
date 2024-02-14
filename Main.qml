@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 Rectangle {
     height: 1280; width: 720
     color: "black"
@@ -39,48 +40,68 @@ Rectangle {
             Layout.rowSpan: 1
             Layout.columnSpan: 2
         }
-        Button {
+        SliderWithButton {
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.preferredWidth: Layout.columnSpan
             Layout.preferredHeight: Layout.rowSpan
-            Layout.rowSpan: 4
+            Layout.rowSpan: 2
             Layout.columnSpan: 1
+
+            id: "backSlider"
+            fromValue: 0; toValue: 85
         }
         Seats{
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.columnSpan: 6
             Layout.rowSpan: 4
-            NumberAnimation on backAngle {
-                from: 0; to: 85
-                duration: 500
-            }
-
-            NumberAnimation on footAngle {
-                from: 0; to: 90
-                duration: 500
-            }
-
-            NumberAnimation on headOffset {
-                from: 0; to: -20
-                duration: 500
-            }
-
-            NumberAnimation on cushionHardness {
-                from: 0.5; to: 1.5
-                duration: 3000
-            }
+            backAngle: backSlider.outputValue
+            footAngle: footSlider.outputValue
+            headOffset: headrestSlider.outputValue
+            cushionHardness: hardnessSlider.outputValue
         }
 
-        Button {
+        SliderWithButton {
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.preferredWidth: Layout.columnSpan
             Layout.preferredHeight: Layout.rowSpan
-            Layout.rowSpan: 4
+            Layout.rowSpan: 2
             Layout.columnSpan: 1
+
+            id: "headrestSlider"
+            fromValue: 0; toValue: -20
         }
+
+        SliderWithButton {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.preferredWidth: Layout.columnSpan
+            Layout.preferredHeight: Layout.rowSpan
+            Layout.rowSpan: 2
+            Layout.columnSpan: 1
+
+            id: "footSlider"
+            fromValue: 0; toValue: 85
+            
+        }
+
+        SliderWithButton {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.preferredWidth: Layout.columnSpan
+            Layout.preferredHeight: Layout.rowSpan
+            Layout.rowSpan: 2
+            Layout.columnSpan: 1
+
+            id: "hardnessSlider"
+            fromValue: 0.4; toValue: 1.0
+            stepSizeValue: 0.2 
+        }   
+
+        
+
         Button {
             Layout.fillHeight: true
             Layout.fillWidth: true
