@@ -6,12 +6,16 @@ Item {
     property real fromValue: 0
     property real toValue: 0
     property real stepSizeValue: 1
+    property real jumpSize: 5
     Button {
             id: "upButton"
             icon.source: "./Assets/up-arrow.png"
             anchors {
                 top: parent.top
                 horizontalCenter: parent.horizontalCenter
+            }
+            onClicked: {
+                mySlider.value += jumpSize
             }
         }
     Slider {
@@ -34,6 +38,9 @@ Item {
         anchors {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
+        }
+        onClicked: {
+            mySlider.value -= jumpSize
         }
     }
 }

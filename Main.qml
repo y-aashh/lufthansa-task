@@ -72,6 +72,7 @@ Rectangle {
 
             id: "headrestSlider"
             fromValue: 0; toValue: -20
+            jumpSize: -2
         }
 
         SliderWithButton {
@@ -98,6 +99,7 @@ Rectangle {
             id: "hardnessSlider"
             fromValue: 0.4; toValue: 1.0
             stepSizeValue: 0.2 
+            jumpSize: 0.2
         }   
 
         
