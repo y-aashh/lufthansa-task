@@ -6,7 +6,7 @@ Item {
     property real fromValue: 0
     property real toValue: 0
     property real stepSizeValue: 1
-    property real jumpSize: 5
+    property real jumpSize: 1
     Button {
             id: "upButton"
             icon.source: "./Assets/up-arrow.png"
@@ -14,7 +14,7 @@ Item {
                 top: parent.top
                 horizontalCenter: parent.horizontalCenter
             }
-            onClicked: {
+            onClicked: {                
                 mySlider.value += jumpSize
             }
         }
