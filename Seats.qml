@@ -4,20 +4,20 @@ import QtQuick.Shapes
 Rectangle {
     id: "seats"
     color: "black"
-    property real cushionHardness: 0
-    property int footAngle: 90
-    property int backAngle: 0
-    property int headOffset: 0
+    property real cushion_hardness: 0
+    property int foot_angle: 90
+    property int back_angle: 0
+    property int head_offset: 0
+    property int stroke_width: 5
     Shape {
         anchors {
             bottom: baseRest.top
             right: backRest.right
         }
         transformOrigin: Item.BottomRight
-        ShapePath {
-            
+        ShapePath {      
             fillColor: "black"
-            strokeColor: "lightGrey"
+            strokeColor: "gray"
             strokeWidth: 0.5
             capStyle: ShapePath.FlatCap
             PathAngleArc {
@@ -25,7 +25,7 @@ Rectangle {
                 centerX: 0 ; centerY: 0
                 radiusX: parent.width/4; radiusY: parent.width/4
                 startAngle: -170
-                sweepAngle: backAngle + 60
+                sweepAngle: back_angle + 60
             }
         }
     }
@@ -37,11 +37,24 @@ Rectangle {
             top: parent.top
             bottom: baseRest.top
         }
-
+        Text {
+            text: "Back Rest"
+            font.family: "Helvetica"
+            font.pointSize: 18
+            color: "white"
+            x: 0; y: backArcDes.height/2 - height - stroke_width
+        }
+        Text {
+            text: back_angle + 90 + "\xB0"
+            font.family: "Helvetica"
+            font.pointSize: 24
+            color: "white"
+            x: 0; y: backArcDes.height/2 + (2*stroke_width)
+        }
         ShapePath {
             fillColor: "black"
-            strokeColor: "lightGrey"
-            strokeWidth: 5
+            strokeColor: "gray"
+            strokeWidth: stroke_width
             capStyle: ShapePath.FlatCap
 
             startX: 0; startY: backArcDes.height/2
@@ -57,19 +70,18 @@ Rectangle {
             bottom: baseRest.bottom
         }
         transformOrigin: Item.Bottom
-        rotation: backAngle
-
+        rotation: back_angle
         Image {
             id: "cushion"
             source: "./Assets/Cushion.png"
             z: -1
             anchors {
                 horizontalCenter: backRest.horizontalCenter
-                horizontalCenterOffset: -30
+                horizontalCenterOffset: -20
                 verticalCenter: backRest.verticalCenter
-                verticalCenterOffset: -15
+                verticalCenterOffset: -10
             }
-            opacity: cushionHardness
+            opacity: cushion_hardness
         }
 
         Image {
@@ -81,7 +93,7 @@ Rectangle {
             }
 
             transform: Translate {
-                y: headOffset
+                y: head_offset
             }
         }
     }
@@ -105,15 +117,15 @@ Rectangle {
         ShapePath {
             
             fillColor: "black"
-            strokeColor: "lightGrey"
+            strokeColor: "gray"
             strokeWidth: 0.5
             capStyle: ShapePath.FlatCap
             PathAngleArc {
                 
-                centerX: footArc.width/2; centerY: 0
+                centerX: footArc.width/3; centerY: 0
                 radiusX: footArc.width/4; radiusY: footArc.width/4
                 startAngle: 10
-                sweepAngle: footAngle + 60
+                sweepAngle: foot_angle + 55
             }
         }
     }
@@ -125,15 +137,29 @@ Rectangle {
             right: stand.left
             top: baseRest.bottom
         }
-
+        Text {
+            text: "Foot Rest"
+            font.family: "Helvetica"
+            font.pointSize: 18
+            color: "white"
+            x: 0; y: footArcDes.height/1.5 + (2*stroke_width)
+        }
+        Text {
+            text: foot_angle + 90 + "\xB0"
+            font.family: "Helvetica"
+            font.pointSize: 24
+            color: "white"
+            x: 0; y: footArcDes.height/1.5 - height - stroke_width
+            
+        }
         ShapePath {
             fillColor: "black"
-            strokeColor: "lightGrey"
-            strokeWidth: 5
+            strokeColor: "gray"
+            strokeWidth: stroke_width
             capStyle: ShapePath.FlatCap
 
-            startX: 0; startY: footArcDes.height/2
-            PathLine {x: footArcDes.width/2; y: footArcDes.height/2}
+            startX: 0; startY: footArcDes.height/1.5
+            PathLine {x: footArcDes.width/2; y: footArcDes.height/1.5}
             PathLine {x: footArcDes.width/1.6; y: footArcDes.height/4}
         }
     }
@@ -147,7 +173,7 @@ Rectangle {
 
         transform: Rotation {
             origin.x: footRest.width/2
-            angle: footAngle
+            angle: foot_angle
         }
     }
     Image {

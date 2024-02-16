@@ -2,9 +2,18 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 Rectangle {
-    height: 1280; width: 720
+    height: 640; width: 480
     color: "black"
+    function updateSlidersFromMemory() {
+            backSlider.outputValue = Math.floor(Math.random() * 90)
+            headrestSlider.outputValue = Math.floor(Math.random() * -20)
+            hardnessSlider.outputValue = Math.floor(Math.random() * 1.5)
+            footSlider.outputValue = Math.floor(Math.random() * 90)
+
+            //console.log("Values updated from memory:", slider1Value, slider2Value, slider3Value)
+        }  
     GridLayout {
+         
         anchors.fill: parent
         rows: 6
         columns: 8
@@ -56,10 +65,10 @@ Rectangle {
             Layout.fillWidth: true
             Layout.columnSpan: 6
             Layout.rowSpan: 4
-            backAngle: backSlider.outputValue
-            footAngle: footSlider.outputValue
-            headOffset: headrestSlider.outputValue
-            cushionHardness: hardnessSlider.outputValue
+            back_angle: backSlider.outputValue
+            foot_angle: footSlider.outputValue
+            head_offset: headrestSlider.outputValue
+            cushion_hardness: hardnessSlider.outputValue
         }
 
         SliderWithButton {
@@ -135,6 +144,11 @@ Rectangle {
             Layout.preferredHeight: Layout.rowSpan
             Layout.rowSpan: 1
             Layout.columnSpan: 2
+
+            text: "Randomize"
+            onClicked: {
+                updateSlidersFromMemory()
+            }
         }
     }
 
