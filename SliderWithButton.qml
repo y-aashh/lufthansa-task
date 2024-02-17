@@ -13,15 +13,16 @@ Item {
             icon.source: "./Assets/up-arrow.png"
             anchors {
                 top: parent.top
-                horizontalCenter: parent.horizontalCenter
-                topMargin: parent.height/4
-                // left: parent.left
-                // right: parent.right
-                // leftMargin: parent.width/4
-                // rightMargin: parent.width/4
+                //horizontalCenter: parent.horizontalCenter
+                topMargin: parent.height/8
+                left: parent.left
+                right: parent.right
+                leftMargin: parent.width/7
+                rightMargin: parent.width/7
             }
-            onClicked: {                
-                outputValue += jumpSize
+            onClicked: {           
+                if (outputValue < toValue)     
+                    outputValue += jumpSize
             }
         }
     Slider {
@@ -51,14 +52,16 @@ Item {
         icon.source: "./Assets/arrow-down.png"
         anchors {
             bottom: parent.bottom
-            horizontalCenter: parent.horizontalCenter
-            // left: parent.left
-            // right: parent.right
-            // leftMargin: parent.width/4
-            // rightMargin: parent.width/4
+            // horizontalCenter: parent.horizontalCenter
+            bottomMargin: parent.height/8
+            left: parent.left
+            right: parent.right
+            leftMargin: parent.width/7
+            rightMargin: parent.width/7
         }
         onClicked: {
-            outputValue -= jumpSize
+            if (outputValue > fromValue)
+                outputValue -= jumpSize
         }
     }
 }

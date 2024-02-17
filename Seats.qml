@@ -4,7 +4,7 @@ import QtQuick.Shapes
 Rectangle {
     id: "seats"
     color: "black"
-    property real cushion_hardness: 0
+    property int cushion_hardness: 0
     property int foot_angle: 90
     property int back_angle: 0
     property int head_offset: 0
@@ -81,9 +81,19 @@ Rectangle {
                 verticalCenter: backRest.verticalCenter
                 verticalCenterOffset: -10
             }
-            opacity: cushion_hardness
+            opacity: cushion_hardness * 0.3 + 0.1
         }
-
+        Image {
+            id: "cushionBorder"
+            source: "./Assets/CushionBorder.png"
+            z: -1
+            anchors {
+                horizontalCenter: backRest.horizontalCenter
+                horizontalCenterOffset: -20
+                verticalCenter: backRest.verticalCenter
+                verticalCenterOffset: -10
+            }
+        }
         Image {
             id: "head"
             source: "./Assets/HeadRest.png"
@@ -93,8 +103,87 @@ Rectangle {
             }
 
             transform: Translate {
-                y: head_offset
+                y: -head_offset
             }
+        }
+    }
+    Shape {
+        id: "headrestArcDes"
+        anchors {
+            left: backRest.left
+            right: parent.right
+            top: parent.top
+            bottom: baseRest.top
+        }
+        Text {
+            text: "Head Rest"
+            font.family: "Helvetica"
+            font.pointSize: 18
+            color: "white"
+            y: headrestArcDes.height/6 - height - stroke_width
+            anchors {
+                right: parent.right
+            }
+        }
+        Text {
+            text: head_offset + " cm"
+            font.family: "Helvetica"
+            font.pointSize: 24
+            color: "white"
+            y: headrestArcDes.height/6 + (2*stroke_width)
+            anchors {
+                right: parent.right
+            }
+        }
+        ShapePath {
+            fillColor: "black"
+            strokeColor: "gray"
+            strokeWidth: stroke_width
+            capStyle: ShapePath.FlatCap
+
+            startX: headrestArcDes.width; startY: headrestArcDes.height/6
+            PathLine {x: headrestArcDes.width/2; y: headrestArcDes.height/6}
+            PathLine {x: headrestArcDes.width/2.5; y: headrestArcDes.height/4}
+        }
+    }
+
+    Shape {
+        id: "hardnessArcDes"
+        anchors {
+            left: backRest.left
+            right: parent.right
+            top: baseRest.top
+            bottom: parent.bottom
+        }
+        Text {
+            text: cushion_hardness + 1
+            font.family: "Helvetica"
+            font.pointSize: 24
+            color: "white"
+            y: headrestArcDes.height/2 - height - stroke_width
+            anchors {
+                right: parent.right
+            }
+        }
+        Text {
+            text: "Seat Hardness"
+            font.family: "Helvetica"
+            font.pointSize: 18
+            color: "white"
+            y: headrestArcDes.height/2 + (2*stroke_width)
+            anchors {
+                right: parent.right
+            }
+        }
+        ShapePath {
+            fillColor: "black"
+            strokeColor: "gray"
+            strokeWidth: stroke_width
+            capStyle: ShapePath.FlatCap
+
+            startX: headrestArcDes.width; startY: headrestArcDes.height/2
+            PathLine {x: headrestArcDes.width/1.5; y: headrestArcDes.height/2}
+            PathLine {x: headrestArcDes.width/1.7; y: headrestArcDes.height/2.5}
         }
     }
 

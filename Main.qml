@@ -1,19 +1,20 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+
+
 Rectangle {
     height: 640; width: 480
     color: "black"
     function updateSlidersFromMemory() {
             backSlider.outputValue = Math.floor(Math.random() * 90)
-            headrestSlider.outputValue = Math.floor(Math.random() * -20)
-            hardnessSlider.outputValue = Math.floor(Math.random() * 1.5)
+            headrestSlider.outputValue = Math.floor(Math.random() * 16)
+            hardnessState.myState = Math.floor(Math.random() * 3)
             footSlider.outputValue = Math.floor(Math.random() * 90)
 
             //console.log("Values updated from memory:", slider1Value, slider2Value, slider3Value)
         }  
     GridLayout {
-         
         anchors.fill: parent
         rows: 6
         columns: 8
@@ -24,6 +25,8 @@ Rectangle {
             Layout.preferredHeight: Layout.rowSpan
             Layout.rowSpan: 1
             Layout.columnSpan: 2
+
+            icon.source: "./Assets/home-icon.png"
         }
         Button {
             Layout.fillHeight: true
@@ -32,6 +35,9 @@ Rectangle {
             Layout.preferredHeight: Layout.rowSpan
             Layout.rowSpan: 1
             Layout.columnSpan: 2
+
+            icon.source: "./Assets/seat-icon.png"
+            
         }
         Button {
             Layout.fillHeight: true
@@ -40,6 +46,7 @@ Rectangle {
             Layout.preferredHeight: Layout.rowSpan
             Layout.rowSpan: 1
             Layout.columnSpan: 2
+            text: "placeholder"
         }
         Button {
             Layout.fillHeight: true
@@ -48,6 +55,7 @@ Rectangle {
             Layout.preferredHeight: Layout.rowSpan
             Layout.rowSpan: 1
             Layout.columnSpan: 2
+            text: "placeholder"
         }
         SliderWithButton {
             Layout.fillHeight: true
@@ -61,6 +69,7 @@ Rectangle {
             fromValue: 0; toValue: 85
         }
         Seats{
+            id: "seats"
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.columnSpan: 6
@@ -68,7 +77,7 @@ Rectangle {
             back_angle: backSlider.outputValue
             foot_angle: footSlider.outputValue
             head_offset: headrestSlider.outputValue
-            cushion_hardness: hardnessSlider.outputValue
+            cushion_hardness: hardnessState.myState
         }
 
         SliderWithButton {
@@ -80,8 +89,7 @@ Rectangle {
             Layout.columnSpan: 1
 
             id: "headrestSlider"
-            fromValue: 0; toValue: -20
-            jumpSize: -2
+            fromValue: 0; toValue: 16
         }
 
         SliderWithButton {
@@ -97,7 +105,21 @@ Rectangle {
             
         }
 
-        SliderWithButton {
+        // SliderWithButton {
+        //     Layout.fillHeight: true
+        //     Layout.fillWidth: true
+        //     Layout.preferredWidth: Layout.columnSpan
+        //     Layout.preferredHeight: Layout.rowSpan
+        //     Layout.rowSpan: 2
+        //     Layout.columnSpan: 1
+
+        //     id: "hardnessSlider"
+        //     fromValue: 0.4; toValue: 1.0
+        //     stepSizeValue: 0.2 
+        //     jumpSize: 0.2
+        // }   
+
+        ThreeButtonRow{
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.preferredWidth: Layout.columnSpan
@@ -105,14 +127,9 @@ Rectangle {
             Layout.rowSpan: 2
             Layout.columnSpan: 1
 
-            id: "hardnessSlider"
-            fromValue: 0.4; toValue: 1.0
-            stepSizeValue: 0.2 
-            jumpSize: 0.2
-        }   
-
+            id: "hardnessState"
+        }
         
-
         Button {
             Layout.fillHeight: true
             Layout.fillWidth: true
