@@ -5,13 +5,16 @@ Item {
     property int myState: 0
     Column {
         anchors {
-        horizontalCenter: parent.horizontalCenter
+            left: parent.left
+            right: parent.right
+            horizontalCenter: parent.horizontalCenter
         }
         Button {
             id: "upButton"
             icon.source: "./Assets/up-arrow.png"
             anchors {
                 horizontalCenter: parent.horizontalCenter
+                
             }
             onClicked: {                
                 if (myState == 0)
@@ -25,8 +28,14 @@ Item {
                 horizontalCenter: parent.horizontalCenter
             }
             text: "1"
-            enabled: myState !== 0
             onClicked: { myState = 0; }
+            background:Rectangle {
+                implicitWidth: 40
+                color: "transparent"
+                border.width: myState == 0 ? 1 : 0
+                border.color: "lightgray"
+                radius: 4
+            }
         }
 
         Button {
@@ -34,8 +43,14 @@ Item {
                 horizontalCenter: parent.horizontalCenter
             }
             text: "2"
-            enabled: myState !== 1
             onClicked: { myState = 1; }
+            background:Rectangle {
+                implicitWidth: 40
+                color: "transparent"
+                border.width: myState == 1 ? 1 : 0
+                border.color: "lightgray"
+                radius: 4
+            }
         }
 
         Button {
@@ -43,8 +58,14 @@ Item {
                 horizontalCenter: parent.horizontalCenter
             }
             text: "3"
-            enabled: myState !== 2
             onClicked: { myState = 2; }
+            background:Rectangle {
+                implicitWidth: 40
+                color: "transparent"
+                border.width: myState == 2 ? 1 : 0
+                border.color: "lightgray"
+                radius: 4
+            }
         }
 
         Button {
@@ -52,8 +73,14 @@ Item {
                 horizontalCenter: parent.horizontalCenter
             }
             text: "4"
-            enabled: myState !== 3
             onClicked: { myState = 3; }
+            background:Rectangle {
+                implicitWidth: 40
+                color: "transparent"
+                border.width: myState == 3 ? 1 : 0
+                border.color: "lightgray"
+                radius: 4
+            }
         }
         Button {
             id: "downButton"

@@ -4,6 +4,7 @@ import QtQuick.Controls
 import QtQuick.Shapes
 
 Rectangle {
+    id: "window"
     height: 640; width: 480
     color: "black"
     property int currentState: 0
@@ -21,6 +22,49 @@ Rectangle {
     property int stateC_foot_angle: 0
     property int stateC_back_angle: 0
     property int stateC_head_offset: 0
+    Rectangle {
+        id: backgroundRect
+        color: "black"
+        opacity: 0.7
+        visible: popup.visible
+        anchors.fill: parent
+        z: popup.z - 1
+    }
+    Item {
+        id: popup
+        width: 100
+        height: 50
+        visible: false
+        z: 99
+        x: (parent.width - popup.width) / 2
+        y: (parent.height - popup.height) / 2
+        Rectangle {
+            width: parent.width
+            height: parent.height
+            color: "black"
+            radius: 5
+            border.color: "#000066"
+
+            Text {
+                anchors.centerIn: parent
+                text: "Saved"
+                font.pixelSize: 18
+                color: "lightgray"
+            }
+        }
+
+        Behavior on visible {
+            NumberAnimation { duration: 300 }
+        }
+
+        Timer {
+            id: popupTimer
+            interval: 1000
+            onTriggered: {
+                popup.visible = false
+            }
+        }
+    }
     GridLayout {
         anchors.fill: parent
         rows: 6
@@ -33,6 +77,7 @@ Rectangle {
             Layout.rowSpan: 1
             Layout.columnSpan: 2
             icon.source: "./Assets/home-icon.png"
+            enabled: false
         }
         Button {
             Layout.fillHeight: true
@@ -51,6 +96,7 @@ Rectangle {
             Layout.rowSpan: 1
             Layout.columnSpan: 2
             text: "placeholder"
+            enabled: false
         }
         Button {
             Layout.fillHeight: true
@@ -60,6 +106,7 @@ Rectangle {
             Layout.rowSpan: 1
             Layout.columnSpan: 2
             text: "placeholder"
+            enabled: false
         }
         SliderWithButton {
             Layout.fillHeight: true
@@ -69,7 +116,12 @@ Rectangle {
             Layout.rowSpan: 2
             Layout.columnSpan: 1
             id: "backSlider"
-            fromValue: 0; toValue: 85
+            fromValue: 0; toValue: 90
+            NumberAnimation on outputValue {
+                id: "backSliderAnimation"
+                duration: 1000
+                running: false
+            } 
         }
         Seats{
             id: "seats"
@@ -91,7 +143,12 @@ Rectangle {
             Layout.rowSpan: 2
             Layout.columnSpan: 1
             id: "headrestSlider"
-            fromValue: 0; toValue: 12
+            fromValue: 0; toValue: 10
+            NumberAnimation on outputValue {
+                id: "headrestSliderAnimation"
+                duration: 1000
+                running: false
+            } 
         }
 
         SliderWithButton {
@@ -102,10 +159,15 @@ Rectangle {
             Layout.rowSpan: 2
             Layout.columnSpan: 1
             id: "footSlider"
-            fromValue: 0; toValue: 85
+            fromValue: 0; toValue: 90
+            NumberAnimation on outputValue {
+                id: "footSliderAnimation"
+                duration: 1000
+                running: false
+            } 
             
         } 
-        ThreeButtonRow{
+        StateButtonColumn{
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.preferredWidth: Layout.columnSpan
@@ -113,6 +175,11 @@ Rectangle {
             Layout.rowSpan: 2
             Layout.columnSpan: 1
             id: "hardnessState"
+            NumberAnimation on myState {
+                id: "hardnessStateAnimation"
+                duration: 1000
+                running: false
+            } 
         }
         Column {
             id: "stateA"
@@ -137,7 +204,7 @@ Rectangle {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
-                text: "State A"
+                text: "Position A"
                 font.family: "Helvetica"
                 font.pointSize: currentState == 0? 22 : 12
                 color: "white"
@@ -148,6 +215,8 @@ Rectangle {
                 }
                 text: "Save"
                 onClicked: {
+                    popup.visible = true
+                    popupTimer.start()
                     currentState = 0
                     stateA_cushion_hardness = hardnessState.myState
                     stateA_foot_angle = footSlider.outputValue
@@ -162,10 +231,14 @@ Rectangle {
                 text: "Load"
                 onClicked: {
                     currentState = 0
-                    hardnessState.myState = stateA_cushion_hardness
-                    footSlider.outputValue = stateA_foot_angle 
-                    backSlider.outputValue = stateA_back_angle 
-                    headrestSlider.outputValue = stateA_head_offset
+                    hardnessStateAnimation.to = stateA_cushion_hardness
+                    hardnessStateAnimation.start()
+                    footSliderAnimation.to = stateA_foot_angle
+                    footSliderAnimation.start()
+                    backSliderAnimation.to = stateA_back_angle
+                    backSliderAnimation.start()
+                    headrestSliderAnimation.to = stateA_head_offset
+                    headrestSliderAnimation.start()
                 }
             }    
         }
@@ -193,7 +266,7 @@ Rectangle {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
-                text: "State B"
+                text: "Position B"
                 font.family: "Helvetica"
                 font.pointSize: currentState == 1? 22 : 12
                 color: "white"
@@ -204,6 +277,8 @@ Rectangle {
                 }
                 text: "Save"
                 onClicked: {
+                    popup.visible = true
+                    popupTimer.start()
                     currentState = 1
                     stateB_cushion_hardness = hardnessState.myState
                     stateB_foot_angle = footSlider.outputValue
@@ -218,10 +293,14 @@ Rectangle {
                 text: "Load"
                 onClicked: {
                     currentState = 1
-                    hardnessState.myState = stateB_cushion_hardness
-                    footSlider.outputValue = stateB_foot_angle 
-                    backSlider.outputValue = stateB_back_angle 
-                    headrestSlider.outputValue = stateB_head_offset
+                    hardnessStateAnimation.to = stateB_cushion_hardness
+                    hardnessStateAnimation.start()
+                    footSliderAnimation.to = stateB_foot_angle
+                    footSliderAnimation.start()
+                    backSliderAnimation.to = stateB_back_angle
+                    backSliderAnimation.start()
+                    headrestSliderAnimation.to = stateB_head_offset
+                    headrestSliderAnimation.start()
                 }
             }    
         }
@@ -249,7 +328,7 @@ Rectangle {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
-                text: "State C"
+                text: "Position C"
                 font.family: "Helvetica"
                 font.pointSize: currentState == 2? 22 : 12
                 color: "white"
@@ -260,6 +339,8 @@ Rectangle {
                 }
                 text: "Save"
                 onClicked: {
+                    popup.visible = true
+                    popupTimer.start()
                     currentState = 2
                     stateC_cushion_hardness = hardnessState.myState
                     stateC_foot_angle = footSlider.outputValue
@@ -274,12 +355,16 @@ Rectangle {
                 text: "Load"
                 onClicked: {
                     currentState = 2
-                    hardnessState.myState = stateC_cushion_hardness
-                    footSlider.outputValue = stateC_foot_angle 
-                    backSlider.outputValue = stateC_back_angle 
-                    headrestSlider.outputValue = stateC_head_offset
+                    hardnessStateAnimation.to = stateC_cushion_hardness
+                    hardnessStateAnimation.start()
+                    footSliderAnimation.to = stateC_foot_angle
+                    footSliderAnimation.start()
+                    backSliderAnimation.to = stateC_back_angle
+                    backSliderAnimation.start()
+                    headrestSliderAnimation.to = stateC_head_offset
+                    headrestSliderAnimation.start()
                 }
-            }   
+            }  
         }
     }   
 }

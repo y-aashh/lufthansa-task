@@ -81,7 +81,7 @@ Rectangle {
                 verticalCenter: backRest.verticalCenter
                 verticalCenterOffset: -10
             }
-            opacity: cushion_hardness * 0.3 + 0.1
+            opacity: cushion_hardness * 0.3 + 0.2
         }
         Image {
             id: "cushionBorder"
