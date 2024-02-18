@@ -13,15 +13,15 @@ Rectangle {
     property int stateA_back_angle: 0
     property int stateA_head_offset: 0
 
-    property int stateB_cushion_hardness: 0
-    property int stateB_foot_angle: 0
-    property int stateB_back_angle: 0
-    property int stateB_head_offset: 0
+    property int stateB_cushion_hardness: 3
+    property int stateB_foot_angle: 45
+    property int stateB_back_angle: 45
+    property int stateB_head_offset: 5
 
-    property int stateC_cushion_hardness: 0
-    property int stateC_foot_angle: 0
-    property int stateC_back_angle: 0
-    property int stateC_head_offset: 0
+    property int stateC_cushion_hardness: 3
+    property int stateC_foot_angle: 90
+    property int stateC_back_angle: 90
+    property int stateC_head_offset: 10
     Rectangle {
         id: backgroundRect
         color: "black"
